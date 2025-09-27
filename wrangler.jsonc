@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "doraemon-movies",
+  "main": "src/index.tsx",
+  "compatibility_date": "2024-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": "./dist",
+  
+  // D1 Database for movies, blogs, and analytics
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "doraemon-production",
+      "database_id": "replace-with-actual-id-after-creation"
+    }
+  ]
+}
