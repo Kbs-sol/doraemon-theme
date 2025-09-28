@@ -1,17 +1,1 @@
-{
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "doraemon-movies",
-  "main": "src/index.tsx",
-  "compatibility_date": "2024-01-01",
-  "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": "./dist",
-  
-  // D1 Database for movies, blogs, and analytics
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "doraemon-production",
-      "database_id": "replace-with-actual-id-after-creation"
-    }
-  ]
-}
+{\n  \"name\": \"doraemon-movies\",\n  \"compatibility_date\": \"2024-01-01\",\n  \"compatibility_flags\": [\"nodejs_compat\"],\n  \"pages_build_output_dir\": \"dist\",\n  \n  // Database Configuration\n  \"d1_databases\": [\n    {\n      \"binding\": \"DB\",\n      \"database_name\": \"doraemon-production\",\n      \"database_id\": \"replace-with-actual-id-after-creation\",\n      \"preview_database_id\": \"replace-with-preview-id\"\n    }\n  ],\n  \n  // Environment Variables (these will be set in Cloudflare Pages dashboard)\n  \"vars\": {\n    \"NODE_ENV\": \"production\",\n    \"SITE_TITLE\": \"Doraemon Movies & Episodes - Watch Free Online\",\n    \"SITE_DESCRIPTION\": \"Watch your favorite Doraemon movies and episodes for free. Daily updated content with latest releases.\",\n    \"AD_UNLOCK_TIMER\": \"30\",\n    \"ENABLE_TELEGRAM_INTEGRATION\": \"true\",\n    \"ENABLE_AI_GENERATION\": \"true\",\n    \"ENABLE_ADVANCED_ANALYTICS\": \"true\",\n    \"CF_PROJECT_NAME\": \"doraemon-movies\"\n  },\n  \n  // Cron Triggers for Automated Tasks\n  \"triggers\": {\n    \"crons\": [\n      // Daily content generation at 9 AM UTC\n      {\n        \"cron\": \"0 9 * * *\",\n        \"route\": \"/api/admin/auto-generate-content\"\n      },\n      // Weekly sitemap update on Sundays at 2 AM UTC\n      {\n        \"cron\": \"0 2 * * 0\", \n        \"route\": \"/api/admin/update-sitemap\"\n      },\n      // Daily analytics cleanup at 3 AM UTC\n      {\n        \"cron\": \"0 3 * * *\",\n        \"route\": \"/api/admin/cleanup-analytics\"\n      }\n    ]\n  },\n  \n  // KV Namespaces for Caching (optional)\n  \"kv_namespaces\": [\n    {\n      \"binding\": \"CACHE\",\n      \"id\": \"replace-with-kv-namespace-id\",\n      \"preview_id\": \"replace-with-preview-kv-id\"\n    }\n  ],\n  \n  // R2 Buckets for File Storage (optional)\n  \"r2_buckets\": [\n    {\n      \"binding\": \"ASSETS\",\n      \"bucket_name\": \"doraemon-assets\",\n      \"preview_bucket_name\": \"doraemon-assets-preview\"\n    }\n  ],\n  \n  // Analytics Engine for Custom Analytics\n  \"analytics_engine_datasets\": [\n    {\n      \"binding\": \"ANALYTICS\",\n      \"dataset\": \"doraemon_analytics\"\n    }\n  ],\n  \n  // Build Configuration\n  \"build\": {\n    \"command\": \"npm run build\",\n    \"cwd\": \".\",\n    \"watch_dir\": \"src\"\n  },\n  \n  // Preview Configuration\n  \"dev\": {\n    \"ip\": \"0.0.0.0\",\n    \"port\": 3000,\n    \"local_protocol\": \"http\"\n  },\n  \n  // Custom Routes\n  \"routes\": [\n    {\n      \"pattern\": \"*.doraemonmovies.com/*\",\n      \"custom_domain\": true\n    }\n  ],\n  \n  // Deployment Configuration\n  \"deployment\": {\n    \"env\": {\n      \"production\": {\n        \"vars\": {\n          \"NODE_ENV\": \"production\",\n          \"LOG_LEVEL\": \"warn\"\n        }\n      },\n      \"preview\": {\n        \"vars\": {\n          \"NODE_ENV\": \"development\",\n          \"LOG_LEVEL\": \"debug\"\n        }\n      }\n    }\n  },\n  \n  // Limits and Performance\n  \"limits\": {\n    \"cpu_ms\": 50000\n  },\n  \n  // Placement\n  \"placement\": {\n    \"mode\": \"smart\"\n  }\n}
