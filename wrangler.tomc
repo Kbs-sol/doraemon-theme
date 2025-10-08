@@ -1,0 +1,64 @@
+name = "doraemon-movies"
+main = "dist/_worker.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Database Configuration
+[[d1_databases]]
+binding = "DB"
+database_name = "doraemon-production"
+database_id = "replace-with-actual-id-after-creation"
+preview_database_id = "replace-with-preview-id"
+
+# KV Namespaces
+[[kv_namespaces]]
+binding = "CACHE"
+id = "replace-with-kv-namespace-id"
+preview_id = "replace-with-preview-kv-id"
+
+# R2 Buckets
+[[r2_buckets]]
+binding = "ASSETS"
+bucket_name = "doraemon-assets"
+preview_bucket_name = "doraemon-assets-preview"
+
+# Analytics Engine
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "doraemon_analytics"
+
+# Environment Variables
+[vars]
+NODE_ENV = "production"
+SITE_TITLE = "Doraemon Movies & Episodes - Watch Free Online"
+SITE_DESCRIPTION = "Watch your favorite Doraemon movies and episodes for free. Daily updated content with latest releases."
+AD_UNLOCK_TIMER = "30"
+ENABLE_TELEGRAM_INTEGRATION = "true"
+ENABLE_AI_GENERATION = "true"
+ENABLE_ADVANCED_ANALYTICS = "true"
+CF_PROJECT_NAME = "doraemon-movies"
+
+# Cron Triggers
+[triggers]
+crons = [
+  "0 9 * * *",   # daily auto-generate content
+  "0 2 * * 0",   # weekly sitemap update
+  "0 3 * * *"    # daily analytics cleanup
+]
+
+# Deployment Envs
+[env.production.vars]
+NODE_ENV = "production"
+LOG_LEVEL = "warn"
+
+[env.preview.vars]
+NODE_ENV = "development"
+LOG_LEVEL = "debug"
+
+# Performance
+[limits]
+cpu_ms = 50000
+
+# Placement
+[placement]
+mode = "smart"
